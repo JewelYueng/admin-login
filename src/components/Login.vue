@@ -1,11 +1,11 @@
 <template>
   <div>
     <div id="login-box">
-      <div id="title">帐号密码登录</div>
+      <div id="title">管理员</div>
       <el-form :model="ruleForm" :rules="rulesInput" ref="ruleForm" label-width="60px"
                id="LoginForm">
-        <el-form-item label="工号" prop="email">
-          <el-input id="email" v-model="ruleForm.email" style="width: 240px;right: 10px"></el-input>
+        <el-form-item label="工号" prop="workId">
+          <el-input id="workId" v-model="ruleForm.workId" style="width: 240px;right: 10px"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="ruleForm.password" style="width: 240px;right: 10px"></el-input>
@@ -23,9 +23,7 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item class="auto-login" style="margin-left: 0">
-          <el-checkbox v-model="ruleForm.userRemember">下次自动登录</el-checkbox>
-        </el-form-item>
+
       </el-form>
       <div  class="login-btn">
         <el-button type="primary" @click="login()">登陆</el-button>
@@ -35,7 +33,7 @@
 </template>
 <style lang="less" rel="stylesheet/less">
   #login-box {
-    height: 320px;
+    height: 290px;
     width: 300px;
     border-radius: 5px;
     box-shadow: 0 0 1px 0 #8492a6;
@@ -88,7 +86,8 @@
   }
   .login-btn{
     position: relative;
-    top:-40px;
+    margin: 20px;
+    top:-20px;
     button{
       width: 100px;
     }
@@ -108,11 +107,8 @@ export default {
 
     };
     let validateEmail = (rule, value, callback) => {
-      let reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
       if (value === '') {
-        callback(new Error('请输入注册时填写的邮箱'));
-      } else if(!reg.test(value)){
-        callback(new Error('请输入正确的邮箱'));
+        callback(new Error('请输入工号'));
       } else {
         callback();
       }
@@ -127,13 +123,12 @@ export default {
     return {
       imgUrl: '',
       ruleForm: {
-        email: '',
+        workId: '',
         password: '',
         validateCode: '',
-        userRemember: true
       },
       rulesInput: {
-        email: [
+        workId: [
           {validator: validateEmail, trigger: 'blur'}
         ],
         password: [
