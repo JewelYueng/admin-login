@@ -156,7 +156,7 @@ export default {
               "Content-Type": 'application/json'
             }
           }).then(res => {
-            if(res.data.code === 200) {
+            if(res.data.code === "200") {
               this.$message({
                 message: '登陆成功',
                 type: 'success'
